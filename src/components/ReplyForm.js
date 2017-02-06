@@ -1,8 +1,10 @@
 
 'use strict';
 
-const React       = require('react');
-const Immutable   = require('immutable');
+const React           = require('react');
+const Immutable       = require('immutable');
+const toggleReplyForm = require('../actions/toggleReplyForm');
+
 
 const ReplyFormStyle =
   { padding: '6px'
@@ -13,7 +15,7 @@ const ReplyFormStyle =
 const TopRowStyle =
   { display: 'flex'
   , flexDirection: 'row'
-  , justifyContent: 'flex-end'
+  , justifyContent: 'space-between'
   , margin: '10px 0'
   , color: '#444'
   , fontSize: 'small'
@@ -24,6 +26,10 @@ const BottomRowStyle =
   , justifyContent: 'flex-end'
   , margin: '10px 0'
   };
+const CloseDivStyle =
+  { cursor: 'pointer'
+  , fontWeight: 'bold'
+  };
 
 const ReplyForm = React.createClass({
 
@@ -33,6 +39,10 @@ const ReplyForm = React.createClass({
     { isOpen: React.PropTypes.bool.isRequired
     , targetItem: React.PropTypes.instanceOf(Immutable.Map)
     },
+
+  handleClose(){
+    toggleReplyForm({ makeOpen: false });
+  },
 
   render() {
     let content = [];
@@ -47,7 +57,13 @@ const ReplyForm = React.createClass({
           key="topRow"
           style={TopRowStyle}
         >
-          {`Replying to ${targetItem.author}`}
+          <div
+            onClick={this.handleClose}
+            style={CloseDivStyle}
+          >
+            {'X'}
+          </div>
+          <div>{`Replying to ${targetItem.author}`}</div>
         </div>
       );
 
