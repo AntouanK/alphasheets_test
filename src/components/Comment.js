@@ -12,7 +12,7 @@ const CommentStyle =
   };
 const CommentBoxStyle =
   { padding: '6px'
-  , margin: '6px'
+  , margin: '6px 0'
   , boxShadow: '0px 2px 6px 2px rgba(0,0,0,0.5)'
   , display: 'flex'
   , backgroundColor: '#efefef'
@@ -32,6 +32,10 @@ const BottomRowStyle =
 const ReplyDivStyle =
   { cursor: 'pointer'
   , textDecoration: 'underline'
+  , fontWeight: 'bold'
+  , margin: '10px'
+  , padding: '10px'
+  , backgroundColor: '#cacaca'
   };
 
 
@@ -85,7 +89,7 @@ const Comment = React.createClass({
               onClick={this.handleClick}
               style={ReplyDivStyle}
             >
-              {'reply'}
+              {'Add comment'}
             </div>
           </div>
         </div>
