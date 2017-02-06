@@ -4,14 +4,12 @@
 const React           = require('react');
 const Immutable       = require('immutable');
 const toggleReplyForm = require('../actions/toggleReplyForm');
-const Comment         = require('../components/Comment');
 
-
-const PostStyle =
+const CommentStyle =
   { display: 'flex'
   , flexDirection: 'column'
   };
-const PostBoxStyle =
+const CommentBoxStyle =
   { padding: '6px'
   , margin: '6px 0'
   , boxShadow: '0px 2px 6px 2px rgba(0,0,0,0.5)'
@@ -35,51 +33,51 @@ const ReplyDivStyle =
   };
 
 
-const Post = React.createClass({
+const Comment = React.createClass({
 
-  displayName: 'Post',
+  displayName: 'Comment',
 
   propTypes:
-    { itemsMap: React.PropTypes.instanceOf(Immutable.Map)
-    , postId: React.PropTypes.string.isRequired
+    { commentId: React.PropTypes.string.isRequired
+    , itemsMap: React.PropTypes.instanceOf(Immutable.Map)
   },
 
   handleClick(){
-    toggleReplyForm({ makeOpen: true, targetItemId: this.props.postId });
+    toggleReplyForm({ makeOpen: true, targetItemId: this.props.commentId });
   },
 
   render() {
     let itemsMap  = this.props.itemsMap;
-    let postId    = this.props.postId;
+    let commentId = this.props.commentId;
 
-    if(!itemsMap.has(postId)){
+    if(!itemsMap.has(commentId)){
       //  handle error case
     }
 
-    let post      = itemsMap.get(postId).toJS();
-    let createdAt = new Date(post.createdAt);
+    let comment   = itemsMap.get(commentId).toJS();
+    let createdAt = new Date(comment.createdAt);
     let childrenComponents =
-      post
+      comment
       .children
-      .map(commentId => (
+      .map(childCommentId => (
         <Comment
-          commentId={commentId}
+          commentId={childCommentId}
           itemsMap={itemsMap}
           key={commentId}
         />
       ));
 
-    console.log('post');
-    console.log(post);
+    console.log('comment');
+    console.log(comment);
 
     return (
-      <div style={PostStyle}>
-        <div style={PostBoxStyle}>
+      <div style={CommentStyle}>
+        <div style={CommentBoxStyle}>
           <div style={MetaRowStyle}>
-            {`from: ${post.author} @ ${createdAt}`}
+            {`from: ${comment.author} @ ${createdAt}`}
           </div>
-          <h3>{post.title}</h3>
-          <div>{post.content}</div>
+          <h3>{comment.title}</h3>
+          <div>{comment.content}</div>
           <div style={BottomRowStyle}>
             <div
               onClick={this.handleClick}
@@ -95,4 +93,4 @@ const Post = React.createClass({
   }
 });
 
-module.exports = Post;
+module.exports = Comment;

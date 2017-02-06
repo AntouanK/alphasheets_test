@@ -4,6 +4,8 @@
 const React           = require('react');
 const Immutable       = require('immutable');
 const toggleReplyForm = require('../actions/toggleReplyForm');
+const setReplyContent = require('../actions/setReplyContent');
+const submitReply     = require('../actions/submitReply');
 
 
 const ReplyFormStyle =
@@ -37,11 +39,21 @@ const ReplyForm = React.createClass({
 
   propTypes:
     { isOpen: React.PropTypes.bool.isRequired
+    , replyContent: React.PropTypes.string
     , targetItem: React.PropTypes.instanceOf(Immutable.Map)
     },
 
   handleClose(){
     toggleReplyForm({ makeOpen: false });
+  },
+
+  handleTextChange(ev){
+    let replyContent = ev.target.value;
+    setReplyContent({ content: replyContent });
+  },
+
+  handleSubmit(){
+    submitReply();
   },
 
   render() {
@@ -71,13 +83,15 @@ const ReplyForm = React.createClass({
         [ topRow
         , <textarea
           key="textArea"
+          onChange={this.handleTextChange}
           rows="6"
+          value={this.props.replyContent}
           />
         , <div
           key="bottomRow"
           style={BottomRowStyle}
           >
-            <button>{'reply'}</button>
+            <button onClick={this.handleSubmit}>{'reply'}</button>
           </div>
         ];
     }

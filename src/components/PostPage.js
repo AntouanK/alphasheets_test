@@ -52,6 +52,7 @@ const PostPage = React.createClass(
           </div>
           <ReplyForm
             isOpen={state.getIn(['UIState', 'replyFormOpen'])}
+            replyContent={state.getIn(['UIState', 'replyContent'])}
             targetItem={state.getIn(['UIState', 'replyTargetItem'])}
           />
         </div>
