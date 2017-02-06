@@ -162,7 +162,8 @@ let handleSubmitReply = (action, state) =>
       .get('UIState')
       .merge(
         Immutable.fromJS(
-          { replyContent: undefined
+          { replyAuthor: undefined
+          , replyContent: undefined
           , replyFormOpen: false
           , replyTargetItem: undefined
           }
