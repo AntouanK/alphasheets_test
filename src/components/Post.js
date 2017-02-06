@@ -1,8 +1,9 @@
 
 'use strict';
 
-const React         = require('react');
-const Immutable     = require('immutable');
+const React           = require('react');
+const Immutable       = require('immutable');
+const toggleReplyForm = require('../actions/toggleReplyForm');
 
 const PostStyle =
   { padding: '6px'
@@ -33,7 +34,11 @@ const Post = React.createClass({
   propTypes:
     { itemsMap: React.PropTypes.instanceOf(Immutable.Map)
     , postId: React.PropTypes.string.isRequired
-    },
+  },
+
+  handleClick(){
+    toggleReplyForm({ makeOpen: true, targetItemId: this.props.postId });
+  },
 
   render() {
     let itemsMap  = this.props.itemsMap;
@@ -54,7 +59,12 @@ const Post = React.createClass({
         <h3>{post.title}</h3>
         <div>{post.content}</div>
         <div style={BottomRowStyle}>
-          <div style={ReplyDivStyle}>{'reply'}</div>
+          <div
+            onClick={this.handleClick}
+            style={ReplyDivStyle}
+          >
+            {'reply'}
+          </div>
         </div>
       </div>
     );
