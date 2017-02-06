@@ -6,9 +6,9 @@
   "scripts": {
     "copy-assets": "cp ./src/index.html ./dist && echo 'copy-assets ok'",
     "lint": "node ./node_modules/eslint/bin/eslint.js ./src && echo 'lint ok'",
-    "bundle": "node ./node_modules/browserify/bin/cmd.js -t reactify -e ./src/App.js -o ./dist/bundle.js && echo 'bundle ok'",
+    "bundle": "node ./node_modules/browserify/bin/cmd.js -d -t reactify -e ./src/App.js -o ./dist/bundle.min.js && echo 'bundle ok'",
     "minify": " node ./node_modules/uglify-js/bin/uglifyjs ./dist/bundle.js --source-map -o ./dist/bundle.min.js && echo 'minify ok'",
-    "build": "npm run lint && npm run copy-assets && npm run bundle && npm run minify && echo 'build ok'"
+    "build": "npm run lint && npm run copy-assets && npm run bundle && echo 'build ok'"
   },
   "keywords": [],
   "author": "",
@@ -19,9 +19,12 @@
     "eslint": "^3.15.0",
     "eslint-plugin-react": "^6.9.0",
     "flux": "^3.1.2",
+    "immutable": "^3.8.1",
+    "object-assign": "^4.1.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "reactify": "^1.1.1",
-    "uglify-js": "^2.7.5"
+    "uglify-js": "^2.7.5",
+    "uuid": "^3.0.1"
   }
 }

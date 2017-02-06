@@ -1,13 +1,11 @@
 
 'use strict';
 
-var ReactDom            = require('react-dom');
-var React               = require('react');
-
+const ReactDom            = require('react-dom');
+const React               = require('react');
+const PostPage            = require('./components/PostPage');
 
 ReactDom.render(
-  <div>
-    {'hello'}
-  </div>,
+  <PostPage />,
   document.getElementById('react-mount')
 );
