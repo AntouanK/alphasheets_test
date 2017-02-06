@@ -74,12 +74,14 @@ let handleToggleReplyform = (action, state) =>
     return state.set('UIState', newUiState);
   };
 
+
 let handleAddItem = (action, state) =>
   {
     let newItemMap = Immutable.fromJS({ [action.item.id]: action.item });
     let newItems = state.get('Items').merge(newItemMap);
     return state.set('Items', newItems);
   };
+
 
 let handleSetReplyContent = (action, state) =>
   {
@@ -92,12 +94,30 @@ let handleSetReplyContent = (action, state) =>
     return state.set('UIState', newUiState);
   };
 
+
+let handleSetReplyAuthor = (action, state) =>
+  {
+    let newUiState =
+      state
+      .get('UIState')
+      .merge(
+        Immutable.fromJS({ replyAuthor: action.author })
+      );
+    return state.set('UIState', newUiState);
+  };
+
+
 let handleSubmitReply = (action, state) =>
   {
-    //  make sure we have valid content and target
+    //  make sure we have valid content, author and target
     let content = state.getIn(['UIState', 'replyContent']);
     if(typeof content !== 'string'
     || content.trim().length < 1){
+      throw new Error('submiting a reply when content is invalid');
+    }
+    let author = state.getIn(['UIState', 'replyAuthor']);
+    if(typeof author !== 'string'
+    || author.trim().length < 1){
       throw new Error('submiting a reply when content is invalid');
     }
     let targetItemId = state.getIn(['UIState', 'replyTargetItem', 'id']);
@@ -110,7 +130,7 @@ let handleSubmitReply = (action, state) =>
     let newComment =
       { id: uuid.v1()
       , type: 'COMMENT'
-      , author: 'Alice'
+      , author
       , content
       , createdAt: Date.now()
       , children: []
@@ -186,6 +206,12 @@ const Store = assign({}, EventEmitter.prototype, {
       //  ------------------------------------------  set-reply-content
       case 'set-reply-content':
         _ROOT = handleSetReplyContent(action, _ROOT);
+        Store.emitChange();
+        break;
+
+      //  ------------------------------------------  set-reply-author
+      case 'set-reply-author':
+        _ROOT = handleSetReplyAuthor(action, _ROOT);
         Store.emitChange();
         break;
 

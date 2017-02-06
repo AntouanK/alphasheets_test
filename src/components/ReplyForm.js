@@ -4,6 +4,7 @@
 const React           = require('react');
 const Immutable       = require('immutable');
 const toggleReplyForm = require('../actions/toggleReplyForm');
+const setReplyAuthor  = require('../actions/setReplyAuthor');
 const setReplyContent = require('../actions/setReplyContent');
 const submitReply     = require('../actions/submitReply');
 
@@ -32,6 +33,16 @@ const CloseDivStyle =
   { cursor: 'pointer'
   , fontWeight: 'bold'
   };
+const AuthorInputBoxStyle =
+  { display: 'flex'
+  , margin: '10px 0'
+  };
+const UserInputStyle =
+  { backgroundColor: 'rgba(0,0,0,0)'
+  , border: 'none'
+  , borderBottom: '1px solid black'
+  , margin: '0 10px'
+  };
 
 const ReplyForm = React.createClass({
 
@@ -39,6 +50,7 @@ const ReplyForm = React.createClass({
 
   propTypes:
     { isOpen: React.PropTypes.bool.isRequired
+    , replyAuthor: React.PropTypes.string
     , replyContent: React.PropTypes.string
     , targetItem: React.PropTypes.instanceOf(Immutable.Map)
     },
@@ -50,6 +62,11 @@ const ReplyForm = React.createClass({
   handleTextChange(ev){
     let replyContent = ev.target.value;
     setReplyContent({ content: replyContent });
+  },
+
+  handleAuthorChange(ev){
+    let replyAuthor = ev.target.value;
+    setReplyAuthor({ author: replyAuthor });
   },
 
   handleSubmit(){
@@ -66,7 +83,7 @@ const ReplyForm = React.createClass({
 
       let topRow = (
         <div
-          key="topRow"
+          key='topRow'
           style={TopRowStyle}
         >
           <div
@@ -79,16 +96,31 @@ const ReplyForm = React.createClass({
         </div>
       );
 
+      let authorRow = (
+        <div
+          key='authorInput'
+          style={AuthorInputBoxStyle}
+        >
+          <label>{'user: '}</label>
+          <input
+            onChange={this.handleAuthorChange}
+            style={UserInputStyle}
+            value={this.props.replyAuthor}
+          />
+        </div>
+      );
+
       content =
         [ topRow
+        , authorRow
         , <textarea
-          key="textArea"
+          key='textArea'
           onChange={this.handleTextChange}
-          rows="6"
+          rows='6'
           value={this.props.replyContent}
           />
         , <div
-          key="bottomRow"
+          key='bottomRow'
           style={BottomRowStyle}
           >
             <button onClick={this.handleSubmit}>{'reply'}</button>
