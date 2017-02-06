@@ -33,6 +33,7 @@ const BottomRowStyle =
 const ReplyDivStyle =
   { cursor: 'pointer'
   , textDecoration: 'underline'
+  , fontWeight: 'bold'
   };
 
 
@@ -86,7 +87,7 @@ const Post = React.createClass({
               onClick={this.handleClick}
               style={ReplyDivStyle}
             >
-              {'reply'}
+              {'Add comment'}
             </div>
           </div>
         </div>
