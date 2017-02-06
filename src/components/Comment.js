@@ -73,16 +73,12 @@ const Comment = React.createClass({
         />
       ));
 
-    console.log('comment');
-    console.log(comment);
-
     return (
       <div style={CommentStyle}>
         <div style={CommentBoxStyle}>
           <div style={MetaRowStyle}>
             {`from: ${comment.author} @ ${createdAt}`}
           </div>
-          <h3>{comment.title}</h3>
           <div>{comment.content}</div>
           <div style={BottomRowStyle}>
             <div
