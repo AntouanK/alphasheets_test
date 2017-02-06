@@ -31,11 +31,11 @@ const BottomRowStyle =
   };
 const ReplyDivStyle =
   { cursor: 'pointer'
-  , textDecoration: 'underline'
   , fontWeight: 'bold'
   , margin: '10px'
-  , padding: '10px'
+  , padding: '6px 8px'
   , backgroundColor: '#cacaca'
+  , boxShadow: '0px 1px 4px 1px rgba(0,0,0,0.5)'
   };
 
 
