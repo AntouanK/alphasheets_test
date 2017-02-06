@@ -16,6 +16,7 @@ const PostBoxStyle =
   , margin: '6px 0'
   , boxShadow: '0px 2px 6px 2px rgba(0,0,0,0.5)'
   , display: 'flex'
+  , backgroundColor: '#efefef'
   , flexDirection: 'column'
   , transform: 'translateZ(0)'
   };

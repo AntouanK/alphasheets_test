@@ -8,12 +8,14 @@ const toggleReplyForm = require('../actions/toggleReplyForm');
 const CommentStyle =
   { display: 'flex'
   , flexDirection: 'column'
+  , margin: '0 0 0 30px'
   };
 const CommentBoxStyle =
   { padding: '6px'
-  , margin: '6px 0'
+  , margin: '6px'
   , boxShadow: '0px 2px 6px 2px rgba(0,0,0,0.5)'
   , display: 'flex'
+  , backgroundColor: '#efefef'
   , flexDirection: 'column'
   , transform: 'translateZ(0)'
   };
@@ -63,7 +65,7 @@ const Comment = React.createClass({
         <Comment
           commentId={childCommentId}
           itemsMap={itemsMap}
-          key={commentId}
+          key={childCommentId}
         />
       ));
 

@@ -29,7 +29,7 @@ let _ROOT =
   /* hardcode a post to show, TEST purposes only!
   */
   let newPost =
-    { id: uuid.v1()
+    { id: uuid.v4()
     , type: 'POST'
     , author: 'Alice'
     , title: 'Lorem Ipsum'
@@ -128,7 +128,7 @@ let handleSubmitReply = (action, state) =>
 
     //  make new comment item
     let newComment =
-      { id: uuid.v1()
+      { id: uuid.v4()
       , type: 'COMMENT'
       , author
       , content
