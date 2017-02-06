@@ -74,9 +74,6 @@ const Post = React.createClass({
         />
       ));
 
-    console.log('post');
-    console.log(post);
-
     return (
       <div style={PostStyle}>
         <div style={PostBoxStyle}>
